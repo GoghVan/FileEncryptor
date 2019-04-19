@@ -32,41 +32,41 @@ public class AESFileEncryptor {
     @SuppressWarnings("static-access")
     public static void encryptFile(String fileName,String encryptedFileName){
         try {
-            FileInputStream fis = new FileInputStream(fileName);
-            FileOutputStream fos = new FileOutputStream(encryptedFileName);
+            FileInputStream fileInputStream = new FileInputStream(fileName);
+            FileOutputStream fileOutputStream = new FileOutputStream(encryptedFileName);
 
             //秘钥自动生成
-            KeyGenerator keyGenerator=KeyGenerator.getInstance("AES");
+            KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(128);
-            Key key=keyGenerator.generateKey();
+            Key key = keyGenerator.generateKey();
 
-
-            byte[] keyValue=key.getEncoded();
-
-            fos.write(keyValue);//记录输入的加密密码的消息摘要
-
-            SecretKeySpec encryKey= new SecretKeySpec(keyValue,"AES"); //加密秘钥
+            byte[] keyValue = key.getEncoded();
+            //记录输入的加密密码的消息摘要
+            fileOutputStream.write(keyValue);
+            //加密秘钥
+            SecretKeySpec encryKey = new SecretKeySpec(keyValue, "AES");
 
             byte[] ivValue=new byte[16];
             Random random = new Random(System.currentTimeMillis());
             random.nextBytes(ivValue);
-            IvParameterSpec iv = new IvParameterSpec(ivValue); //获取系统时间作为IV
-
-            fos.write("AESFileEncryptor".getBytes()); //文件标识符
-
-            fos.write(ivValue);	 //记录IV
+            //获取系统时间作为IV
+            IvParameterSpec iv = new IvParameterSpec(ivValue);
+            //文件标识符
+            fileOutputStream.write("AESFileEncryptor".getBytes());
+            //记录IV
+            fileOutputStream.write(ivValue);
             Cipher cipher = Cipher.getInstance("AES/CFB/PKCS5Padding");
-            cipher.init(cipher.ENCRYPT_MODE, encryKey,iv);
+            cipher.init(cipher.ENCRYPT_MODE, encryKey, iv);
 
-            CipherInputStream cis=new CipherInputStream(fis, cipher);
+            CipherInputStream cis = new CipherInputStream(fileInputStream, cipher);
 
-            byte[] buffer=new byte[1024];
-            int n=0;
-            while((n=cis.read(buffer))!=-1){
-                fos.write(buffer,0,n);
+            byte[] buffer = new byte[1024];
+            int n = 0;
+            while((n = cis.read(buffer))!= -1){
+                fileOutputStream.write(buffer, 0, n);
             }
             cis.close();
-            fos.close();
+            fileOutputStream.close();
         } catch (InvalidKeyException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -95,39 +95,45 @@ public class AESFileEncryptor {
      * encryptedFileName:已加密文件路径("G:/test/middle.txt")
      * decryptedFileName:解密文件路径("G:/test/end.txt")
      */
+
     @SuppressWarnings("static-access")
     public static void decryptedFile(String encryptedFileName,String decryptedFileName){
 
         try {
-            FileInputStream fis = new FileInputStream(encryptedFileName); //文件输入流
-            FileOutputStream fos = new FileOutputStream(decryptedFileName); // 文件输出流
+            //文件输入流
+            FileInputStream fileInputStream = new FileInputStream(encryptedFileName);
+            // 文件输出流
+            FileOutputStream fileOutputStream = new FileOutputStream(decryptedFileName);
 
             byte[] fileIdentifier = new byte[16];
             byte[] keyValue = new byte[16];
-
-            fis.read(keyValue); //读记录的文件加密密码的消息摘要
-            fis.read(fileIdentifier);
+            //读记录的文件加密密码的消息摘要
+            fileInputStream.read(keyValue);
+            fileInputStream.read(fileIdentifier);
 
             if(new String (fileIdentifier).equals("AESFileEncryptor")){
                 SecretKeySpec key= new SecretKeySpec(keyValue,"AES");
                 byte[] ivValue= new byte[16];
-                fis.read(ivValue); //获取IV值
+                //获取IV值
+                fileInputStream.read(ivValue);
                 IvParameterSpec iv= new IvParameterSpec(ivValue);
                 Cipher cipher = Cipher.getInstance("AES/CFB/PKCS5Padding");
                 cipher.init(cipher.DECRYPT_MODE, key,iv);
-                CipherInputStream cis= new CipherInputStream(fis, cipher);
+                CipherInputStream cis= new CipherInputStream(fileInputStream, cipher);
                 byte[] buffer=new byte[1024];
                 int n=0;
                 while((n=cis.read(buffer))!=-1){
-                    fos.write(buffer,0,n);
+                    fileOutputStream.write(buffer,0,n);
                 }
                 cis.close();
-                fos.close();
-                //JOptionPane.showMessageDialog(null, "解密成功"); //跳出提示框
+                fileOutputStream.close();
+                //跳出提示框
+                //JOptionPane.showMessageDialog(null, "解密成功");
                 System.out.println("加密文件解密成功!");
             }else{
-                System.out.println("文件不是我加密的，爱找谁着谁去!");
-                //JOptionPane.showMessageDialog(null, "文件不是我加密的，爱找谁着谁去");//跳出提示框
+                System.out.println("加密文件解密失败！");
+                //跳出提示框
+                //JOptionPane.showMessageDialog(null, "文件不是我加密的，爱找谁着谁去");
             }
         } catch (InvalidKeyException e) {
             // TODO Auto-generated catch block
