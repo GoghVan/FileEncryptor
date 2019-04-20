@@ -1,8 +1,10 @@
-package com.david.test;
+package com.david.test.ECCtest;
 
+
+import com.david.test.ECCtest.BASE64Decoder;
+import com.david.test.ECCtest.ECCEnum;
 
 import javax.crypto.Cipher;
-import javax.crypto.CipherInputStream;
 import javax.crypto.NullCipher;
 import java.io.*;
 import java.security.KeyFactory;

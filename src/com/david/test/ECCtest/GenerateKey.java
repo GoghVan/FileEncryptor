@@ -1,9 +1,11 @@
-package com.david.test;
+package com.david.test.ECCtest;
 
 /**
  * Created by Gavin on 2019/4/20.
  */
 
+import com.david.test.ECCtest.BASE64Encoder;
+import com.david.test.ECCtest.ECCEnum;
 import org.bouncycastle.jce.interfaces.ECPrivateKey;
 import org.bouncycastle.jce.interfaces.ECPublicKey;
 
