@@ -6,6 +6,9 @@ package com.david.ECCModel;
 
 import java.io.*;
 
+/**
+ * 将秘钥进行解密
+ */
 public class BASE64Decoder extends FilterInputStream {
 
     private static final char[] chars = {
@@ -120,11 +123,9 @@ public class BASE64Decoder extends FilterInputStream {
         }
         catch (UnsupportedEncodingException ignored) { }
 
-        BASE64Decoder in = new BASE64Decoder(
-                new ByteArrayInputStream(bytes));
+        BASE64Decoder in = new BASE64Decoder(new ByteArrayInputStream(bytes));
 
-        ByteArrayOutputStream out =
-                new ByteArrayOutputStream((int) (bytes.length * 0.67));
+        ByteArrayOutputStream out = new ByteArrayOutputStream((int) (bytes.length * 0.67));
 
         try {
             byte[] buf = new byte[4 * 1024];  // 4K buffer
@@ -133,36 +134,13 @@ public class BASE64Decoder extends FilterInputStream {
                 out.write(buf, 0, bytesRead);
             }
             out.close();
-
             return out.toByteArray();
         }
         catch (IOException ignored) { return null; }
     }
 
-//    public static void main(String[] args) throws Exception {
-//        if (args.length != 1) {
-//            System.err.println("Usage: java Base64Decoder fileToDecode");
-//            return;
-//        }
-//
-//        BASE64Decoder decoder = null;
-//        try {
-//            decoder = new BASE64Decoder(
-//                    new BufferedInputStream(
-//                            new FileInputStream(args[0])));
-//            byte[] buf = new byte[4 * 1024];  // 4K buffer
-//            int bytesRead;
-//            while ((bytesRead = decoder.read(buf)) != -1) {
-//                System.out.write(buf, 0, bytesRead);
-//            }
-//        }
-//        finally {
-//            if (decoder != null) decoder.close();
-//        }
-//    }
 
     public static byte[] decodeBuffer(String key) {
-
         return decodeToBytes(key);
     }
 }

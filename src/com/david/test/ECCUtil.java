@@ -36,20 +36,7 @@ public class ECCUtil implements Serializable {
 
         Cipher cipher = new NullCipher();
         cipher.init(Cipher.ENCRYPT_MODE, pubKey);
-        byte [] encryptFile = cipher.doFinal(data);
-        String str1 = "G:/TestFile/ECC/middle.txt";
-        File fileInst = new File(str1);
-        try {
-            FileWriter fw = new FileWriter(fileInst);
-            for (byte i : encryptFile) {
-                fw.write(String.valueOf((int) i));
-            }
-            fw.flush();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
-        }
+
         return cipher.doFinal(data);
     }
 
@@ -74,15 +61,16 @@ public class ECCUtil implements Serializable {
         Cipher cipher = new NullCipher();
         cipher.init(Cipher.DECRYPT_MODE, priKey);
 
-        String str3 = "G:/TestFile/ECC/end.txt";
-        File f=new File(str3);//新建一个文件对象，如果不存在则创建一个该文件
-        FileWriter fw;
-        try {
-            fw=new FileWriter(f);
-            String str=new String(cipher.doFinal(data));
-            fw.write(str);//将字符串写入到指定的路径下的文件中
-            fw.close();
-        } catch (IOException e) { e.printStackTrace(); }
+//        String str3 = "G:/TestFile/ECC/end.txt";
+//        File f=new File(str3);//新建一个文件对象，如果不存在则创建一个该文件
+//        FileWriter fw;
+//        try {
+//            fw=new FileWriter(f);
+//            String str=new String(cipher.doFinal(data));
+////            System.out.println("解密文本：" + str);
+//            fw.write(str);//将字符串写入到指定的路径下的文件中
+//            fw.close();
+//        } catch (IOException e) { e.printStackTrace(); }
 
         return cipher.doFinal(data);
     }

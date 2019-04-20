@@ -5,6 +5,7 @@ package com.david.test;
  */
 
 import java.io.*;
+import java.util.Arrays;
 import java.util.Map;
 
 public class ECTest {
@@ -19,9 +20,21 @@ public class ECTest {
         System.out.println("公钥：" + pubKey);
 
         String text = "都挺好其实最开始大家过的都不好！！";
+        System.out.println("原始文本：" + text);
         byte [] b = ECCUtil.encrypt(text.getBytes("UTF-8"),pubKey);
+        System.out.print("b 中的值：");
+        for (byte i : b) {
+            System.out.print(i + " ");
+        }
+        System.out.println();
 
-//        String str = BASE64Encoder.encodeBuffer(b);
+        String str1 = "G:/TestFile/ECC/middle.txt";
+        File file1 = new File(str1);
+        FileWriter fileWriter = new FileWriter(file1);
+        for (byte i : b) {
+            fileWriter.write(String.valueOf((int) i));
+        }
+        fileWriter.flush();
 
 
         File file = new File("G:/TestFile/ECC/middle.txt");
@@ -36,10 +49,20 @@ public class ECTest {
             e.printStackTrace();
         }
 
-        System.out.println("密文：" + a);
-        String outputStr = new String(ECCUtil.decrypt(b,privKey));
+        System.out.print("a 中的值：");
+        for (byte i : b) {
+            System.out.print(i + " ");
+        }
         System.out.println();
-        System.out.println("原始文本：" + text);
-        System.out.println("解密文本：" + outputStr);
+
+        System.out.println(Arrays.equals(a, b));
+        System.out.println(a instanceof byte[]);
+        System.out.println(b instanceof byte[]);
+
+        String outputStr1 = new String(ECCUtil.decrypt(a,privKey));
+        String outputStr2 = new String(ECCUtil.decrypt(b,privKey));
+        System.out.println("解密文本a：" + outputStr1);
+        System.out.println("解密文本b：" + outputStr2);
     }
+
 }
