@@ -1,4 +1,4 @@
-package com.david.ECCModel;
+package com.david.model.ECCModel;
 
 
 import javax.crypto.Cipher;

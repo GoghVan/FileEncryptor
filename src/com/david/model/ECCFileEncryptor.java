@@ -1,6 +1,6 @@
 package com.david.model;
 
-import com.david.ECCModel.*;
+import com.david.model.ECCModel.*;
 
 import java.io.*;
 import java.util.Map;

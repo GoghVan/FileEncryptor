@@ -1,4 +1,4 @@
-package com.david.ECCModel;
+package com.david.model.ECCModel;
 
 /**
  * Created by Gavin on 2019/4/20.
