@@ -1,4 +1,4 @@
-package com.david.model;
+package com.david.test;
 
 import org.junit.Test;
 
@@ -7,22 +7,23 @@ import static org.junit.Assert.*;
 /**
  * Created by Gavin on 2019/4/21.
  */
-public class PICEncryptorTest {
+public class testTest {
     String str1 = "G:/TestFile/PIC/start.jpg";
     String str2 = "G:/TestFile/PIC/middle.jpg";
     String str3 = "G:/TestFile/PIC/end.jpg";
+
     @Test
-    public void encryptFile() throws Exception {
+    public void pictureEncryption() throws Exception {
         System.out.println("encryptFile start:");
-        PICEncryptor.encryptFile(str1, str2);
+        test.pictureEncryption(str1, str2);
         System.out.println("encryptFile finish:");
     }
 
     @Test
-    public void decryptedFile() throws Exception {
-        System.out.println("decryptFile start:");
-        PICEncryptor.decryptedFile(str2, str3);
-        System.out.println("decryptFile finish:");
+    public void pictureDecryption() throws Exception {
+        System.out.println("decryptedFile start:");
+        test.pictureDecryption(str2, str3);
+        System.out.println("decryptedFile finish:");
     }
 
 }

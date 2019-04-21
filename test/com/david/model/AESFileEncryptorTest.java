@@ -2,10 +2,12 @@ package com.david.model;
 
 import org.junit.Test;
 
+import static org.junit.Assert.*;
+
 /**
- * Created by Gavin on 2019/4/18.
+ * Created by Gavin on 2019/4/21.
  */
-public class MyFileEncryptorTest {
+public class AESFileEncryptorTest {
     String str1 = "F:/ShoolData/test/before.txt";
     String str2 = "F:/ShoolData/test/after.txt";
     String str3 = "F:/ShoolData/test/final.txt";
@@ -23,4 +25,5 @@ public class MyFileEncryptorTest {
         AESFileEncryptor.decryptedFile(str2, str3);
         System.out.println("decryptedFile finish:");
     }
+
 }

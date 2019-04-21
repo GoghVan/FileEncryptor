@@ -2,9 +2,8 @@ package com.david.model.PICModel;
 /*
 图像置乱与解密算法 
  */
-import java.util.*;  
+import java.util.*;
 public class MyAlgorithms {
-
 	//加解密时使用，选择法排序，同时生成地址映射表
 	public static void SelectSort(double arr[], int length, HashMap m, int address_arr[])
 	{
@@ -18,15 +17,15 @@ public class MyAlgorithms {
 				if (arr[j] < arr[index])index = j;
 			}
 			if (index != i)
-				{
+			{
 				//swap(arr[i], arr[index]);
 				double temp;
 				temp=arr[i];
 				arr[i]=arr[index];
 				arr[index]=temp;
-				}
-			
-			int address=Integer.parseInt(String.valueOf(m.get(arr[i]))); 
+			}
+
+			int address=Integer.parseInt(String.valueOf(m.get(arr[i])));
 			//int address=(int)m.get(arr[i]);
 			address_arr[address] = i;
 
@@ -45,10 +44,9 @@ public class MyAlgorithms {
 
 			它的值意为，那个元素在经过排序的序列中的下标。
 			*/
-			
+
 		}
 	}
-
 	//生成一个混沌序列，以x为初值
 	public static void produce_logisticArray(double x, double arr[], int N)
 	{
@@ -72,7 +70,6 @@ public class MyAlgorithms {
 		}
 
 	}
-
 	//行置乱算法
 	public double rowEncrypt(int pixel[][], double x1, int i,int M, int N)
 	{
@@ -81,7 +78,7 @@ public class MyAlgorithms {
 		double logistic_array[] = new double[N] ;
 		produce_logisticArray(x1, logistic_array, N);
 		//建立值与下标映射的Map
-		HashMap m=new HashMap<String , Double>();  
+		HashMap m=new HashMap<String , Double>();
 		produce_map(m, logistic_array, N);
 		//拷贝混沌序列
 		double temp_logArr[]=new double[N];
@@ -105,7 +102,6 @@ public class MyAlgorithms {
 		}
 		return logistic_array[N - 1];
 	}
-
 	//行置乱接口
 	public void rowEncrypt_interface(int pixel[][], double x1, int M, int N)
 	{
@@ -116,7 +112,6 @@ public class MyAlgorithms {
 			x = rowEncrypt(pixel, x, i, M,N);
 		}
 	}
-
 	//列置乱算法
 	public double columnEncrypt(int pixel[][], double x1, int i,int M, int N)
 	{
@@ -125,7 +120,7 @@ public class MyAlgorithms {
 		double logistic_array[]=new double[N];
 		produce_logisticArray(x1, logistic_array, N);
 		//建立值与下标映射的Map
-		HashMap m=new HashMap<String , Double>();  
+		HashMap m=new HashMap<String , Double>();
 		produce_map(m, logistic_array, N);
 		//拷贝混沌序列
 		double temp_logArr[]=new double[N];
@@ -148,7 +143,6 @@ public class MyAlgorithms {
 
 		return logistic_array[N - 1];
 	}
-
 	//列置乱接口
 	public void columnEncrypt_interface(int pixel[][], double x1, int M, int N)
 	{
@@ -180,9 +174,8 @@ public class MyAlgorithms {
 				pixel[i][j] = temp2[i][j];
 			}
 		}
-			
-	}
 
+	}
 	//行解密算法
 	public double rowDecrypt(int pixel[][], double x1, int i, int N)
 	{
@@ -191,7 +184,7 @@ public class MyAlgorithms {
 		double logistic_array[]=new double[N];
 		produce_logisticArray(x1, logistic_array, N);
 		//建立值与下标映射的Map
-		HashMap m=new HashMap<String , Double>();  
+		HashMap m=new HashMap<String , Double>();
 		produce_map(m, logistic_array, N);
 		//拷贝混沌序列
 		double temp_logArr[]=new double[N];
@@ -213,7 +206,6 @@ public class MyAlgorithms {
 		}
 		return logistic_array[N - 1];
 	}
-
 	//行解密接口
 	public void rowDecrypt_interface(int pixel[][], double x1, int M, int N)
 	{
@@ -223,7 +215,6 @@ public class MyAlgorithms {
 			x = rowDecrypt(pixel, x, i, N);
 		}
 	}
-
 	//列解密算法
 	public double columnDecrypt(int pixel[][], double x1, int i,int M,int N)
 	{
@@ -232,7 +223,7 @@ public class MyAlgorithms {
 		double logistic_array[]=new double[N];
 		produce_logisticArray(x1, logistic_array, N);
 		//建立值与下标映射的Map
-		HashMap m=new HashMap<String , Double>();  
+		HashMap m=new HashMap<String , Double>();
 		produce_map(m, logistic_array, N);
 		//拷贝混沌序列
 		double temp_logArr[]=new double[N];
@@ -255,7 +246,6 @@ public class MyAlgorithms {
 
 		return logistic_array[N - 1];
 	}
-
 	//列解密接口
 	public void columnDecrypt_interface(int pixel[][], double x1, int M, int N)
 	{
@@ -277,7 +267,7 @@ public class MyAlgorithms {
 			x = columnDecrypt(temp, x, i, N, M);
 
 		}
-		
+
 		int temp2[][]=new int[M][N];
 		//再次行列互换
 		af.arr_change(temp, temp2, N, M);
@@ -290,19 +280,18 @@ public class MyAlgorithms {
 			}
 		}
 	}
-
-	//置乱(加密)
+	//置乱
 	public void encrypt(int pixel[][], double x1, int M, int N)
 	{
 		rowEncrypt_interface(pixel, x1, M, N);
 		columnEncrypt_interface(pixel, x1, M, N);
 	}
-
 	//解密
 	public void decrypt(int pixel[][], double x1, int M, int N)
 	{
 		columnDecrypt_interface(pixel, x1, M, N);
 		rowDecrypt_interface(pixel, x1, M, N);
-	
+
 	}
 }
+
