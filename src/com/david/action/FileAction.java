@@ -2,11 +2,6 @@ package com.david.action;
 
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils;
-import org.apache.commons.io.FileUtils;
-import org.apache.struts2.ServletActionContext;
-
-import javax.servlet.http.HttpServletRequest;
 import java.io.*;
 
 /**
@@ -20,23 +15,11 @@ public class FileAction extends ActionSupport{
     // 上传的文件名
     private String fileContentType;
 
-    @Override
-    public String execute() throws Exception{
-        System.out.println("文件: " + file);
-        System.out.println("文件的格式类型名: " + fileFileName);
-        System.out.println("文件名" + fileContentType);
-
-        String realPath = ServletActionContext.getServletContext().getRealPath("/fileAction");
-        File file1 = new File(realPath);
-        if (!file1.exists()) file1.mkdirs();
-        try{
-            FileUtils.copyFile(file, new File(file1, fileFileName));
-//            System.out.println("file: " + file1.);
-        }catch (IOException e){
-            e.printStackTrace();
-            return "fail";
-        }
-        return "success";
+    public File getFile(){
+        return file;
+    }
+    public void setFile(File file){
+        this.file = file;
     }
 
     public String getFileContentType(){
@@ -53,11 +36,33 @@ public class FileAction extends ActionSupport{
         this.fileFileName = fileFileName;
     }
 
-    public File getFile(){
-        return file;
-    }
-    private void setFile(File file){
-        this.file = file;
+    @Override
+    public String execute() throws Exception{
+        System.out.println("文件: " + file);
+        System.out.println("文件的格式类型名: " + fileFileName);
+        System.out.println("文件名: " + fileContentType);
+
+        InputStream inputStream = new FileInputStream(file);
+        OutputStream outputStream = new FileOutputStream("d:/" + fileFileName);
+        try{
+            byte[] buffer = new byte[(int)file.length()];
+
+            while (inputStream.read(buffer) >0){
+                outputStream.write(buffer);
+            }
+            System.out.print("buffer: ");
+            for (byte i : buffer) {
+                System.out.print(i + " ");
+            }
+            System.out.println();
+        }catch (IOException e){
+            e.printStackTrace();
+            return "fail";
+        }finally {
+            outputStream.close();
+            inputStream.close();
+        }
+        return "success";
     }
 
 }

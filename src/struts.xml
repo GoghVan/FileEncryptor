@@ -5,19 +5,11 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <!--<package name="struts2" extends="struts-default">-->
-        <!--<action name="fileAction" class="com.david.action.FileAction">-->
-            <!--<interceptor-ref name="defaultStack"/>-->
-            <!--<result name="success">success.jsp</result>-->
-            <!--<result name="fail">fail.jsp</result>-->
-        <!--</action>-->
-    <!--</package>-->
-    <package name="default" extends="struts-default">
-
-        <action name="upload" class="com.david.test.FileUpload">
-            <result name="success">/result.jsp</result>
+    <package name="struts2" extends="struts-default">
+        <action name="fileAction" class="com.david.action.FileAction">
+            <result name="success">success.jsp</result>
+            <result name="fail">fail.jsp</result>
         </action>
-
-
     </package>
+
 </struts>
