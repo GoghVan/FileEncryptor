@@ -67,7 +67,7 @@
 <div class="container footer">
   <div class="row">
     <div class="col-sm-12">
-      File encryption system made by <a href="#" target="_blank">GaoWei</a>.
+      File encryption system made by <a href="#" target="_blank">David</a>.
     </div>
   </div>
 </div>

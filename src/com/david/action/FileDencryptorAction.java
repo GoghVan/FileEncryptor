@@ -20,6 +20,15 @@ public class FileDencryptorAction extends ActionSupport{
     private String fileContentType;
     // 解密类型
     private String encryptorType;
+    // 解密文件存放地址
+    private String dencryptedFileAddress;
+
+    public String getDencryptedFileAddress(){
+        return dencryptedFileAddress;
+    }
+    public void setDencryptedFileAddress(String dencryptedFileAddress){
+        this.dencryptedFileAddress = dencryptedFileAddress;
+    }
 
     public String getEncryptorType(){
         return encryptorType;
@@ -49,16 +58,22 @@ public class FileDencryptorAction extends ActionSupport{
         this.fileFileName = fileFileName;
     }
 
+    // 文件暂存位置
+    String filename = "F:/ShoolData/大四学习安排/毕业设计" +
+            "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/" + fileFileName;
 
     @Override
     public String execute() throws Exception{
+//        System.out.println("File: " + file);
+//        System.out.println("fileFileName: " + fileFileName);
+//        System.out.println("fileContentType: " + fileContentType);
+//        System.out.println("encryptorType: " + encryptorType);
+//        System.out.println("encryptedFileAddress: " + dencryptedFileAddress);
         // 上传文件扩展名
-        String expandedName = fileFileName.substring(fileFileName.lastIndexOf("."));
+//        String expandedName = fileFileName.substring(fileFileName.lastIndexOf("."));
         // 文件暂存位置
-        String filename = "F:/ShoolData/大四学习安排/毕业设计" +
-                "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/" + fileFileName;
-        String decryptedFileName = "F:/ShoolData/大四学习安排/毕业设计" +
-                "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/end" + expandedName;
+//        String decryptedFileName = "F:/ShoolData/大四学习安排/毕业设计" +
+//                "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/end" + expandedName;
 
         // 打开文件输入流与输出流
         InputStream inputStream = new FileInputStream(file);
@@ -76,29 +91,29 @@ public class FileDencryptorAction extends ActionSupport{
         }
 
         File file1 = new File(filename);
-        File file2 = new File(decryptedFileName);
+//        File file2 = new File(decryptedFileName);
 
         // 选择解密模块
         switch (encryptorType){
             case "AES":
-                AESFileEncryptor.decryptedFile(filename, decryptedFileName);
+                AESFileEncryptor.decryptedFile(filename, dencryptedFileAddress);
                 if (file1.exists()) file1.delete();
-                if (file2.exists()) file2.delete();
+//                if (file2.exists()) file2.delete();
                 return "success";
             case "ECC":
-                ECCFileEncryptor.decryptedFile(filename, decryptedFileName);
+                ECCFileEncryptor.decryptedFile(filename, dencryptedFileAddress);
                 if (file1.exists()) file1.delete();
-                if (file2.exists()) file2.delete();
+//                if (file2.exists()) file2.delete();
                 return "success";
             case "RSA":
-                RSAFileEncryptor.decryptedFile(filename, decryptedFileName);
+                RSAFileEncryptor.decryptedFile(filename, dencryptedFileAddress);
                 if (file1.exists()) file1.delete();
-                if (file2.exists()) file2.delete();
+//                if (file2.exists()) file2.delete();
                 return "success";
             case "PIC":
-                PICEncryptor.decryptedFile(filename, decryptedFileName);
+                PICEncryptor.decryptedFile(filename, dencryptedFileAddress);
                 if (file1.exists()) file1.delete();
-                if (file2.exists()) file2.delete();
+//                if (file2.exists()) file2.delete();
                 return "success";
             default:
                 return "fail";

@@ -5,11 +5,17 @@
         "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
+    <!--<package name="struts2" extends="struts-default">-->
+        <!--<action name="FileEncryptorAction" class="com.david.action.FileEncryptorAction">-->
+            <!--<result name="success">success.jsp</result>-->
+            <!--<result name="fail">fail.jsp</result>-->
+        <!--</action>-->
+    <!--</package>-->
+
     <package name="struts2" extends="struts-default">
         <action name="FileEncryptorAction" class="com.david.action.FileEncryptorAction">
-            <result name="success">success.jsp</result>
+            <result name="success">index.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
     </package>
-
 </struts>

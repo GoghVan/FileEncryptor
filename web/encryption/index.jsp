@@ -63,22 +63,22 @@
                         </div>
                     </div>
                     <div class="form-bottom">
-                        <form role="form" action="" method="post" class="login-form">
+                        <form role="form" action="FileEncryptorAction.action" method="post" class="login-form" enctype="multipart/form-data">
                             <div class="form-group">
                                 <input type="text"  placeholder="选择文件" class="form-password form-control" id="form-username" readonly>
-                                <input type="file" name="form-file" placeholder="" class="form-username form-control" id="form-file" style="display: none">
+                                <input type="file" name="file" placeholder="" class="form-username form-control" id="form-file" style="display: none">
                             </div>
                             <div class="form-group">
-                                <select class="form-password form-control" style="height: 50px">
+                                <select name="encryptorType" class="form-password form-control" style="height: 50px">
                                     <option value='' disabled selected style='display:none;'>选择加密类型</option>
                                     <option value ="AES">AES</option>
                                     <option value ="RSA">RSA</option>
                                     <option value="ECC">ECC</option>
-                                    <option value="IMGHidden">图片隐藏</option>
+                                    <option value="PIC">PIC</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <input type="text"  placeholder="选择文件存放路径" class="form-text form-control" id="form-dire">
+                                <input type="text"  name="encryptedFileAddress" placeholder="选择文件存放路径" class="form-text form-control" id="form-dire">
                             </div>
                             <button type="submit" class="btn">提交</button>
                         </form>
