@@ -15,7 +15,9 @@ import java.util.Map;
 
 public class GenerateKey implements Serializable {
     // 默认密钥对的存放地址
-    static String ECCKeyFile = "G:/TestFile/ECC/ECCKey.xml";
+    static String ECCKeyFile ="F:/ShoolData/大四学习安排/毕业设计" +
+            "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/ECCKey.xml";
+
     static {
         Security.addProvider(new org.bouncycastle.jce.provider.BouncyCastleProvider());
     }
@@ -26,7 +28,7 @@ public class GenerateKey implements Serializable {
      * @throws NoSuchAlgorithmException 抛出异常
      *
      */
-    public static void saveKeyPair() throws NoSuchProviderException, NoSuchAlgorithmException {
+    public static void saveKeyPair() throws NoSuchAlgorithmException {
         try {
             System.out.println("...密钥对正在产生！");
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ECCEnum.ALGORITHM.value(),

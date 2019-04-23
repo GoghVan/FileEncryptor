@@ -6,7 +6,7 @@
 
 <struts>
     <package name="struts2" extends="struts-default">
-        <action name="fileAction" class="com.david.action.FileAction">
+        <action name="FileEncryptorAction" class="com.david.action.FileEncryptorAction">
             <result name="success">success.jsp</result>
             <result name="fail">fail.jsp</result>
         </action>
