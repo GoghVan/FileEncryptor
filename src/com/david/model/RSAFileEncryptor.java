@@ -82,8 +82,9 @@ public class RSAFileEncryptor {
 
             RSAPublicKey publicKey = (RSAPublicKey) getKeyPair().getPublic();  // 得到公钥
             String publicKeyString = new String(Base64.encodeBase64(publicKey.getEncoded()));
-            //base64编码的公钥
+            //base64编码的公钥，转换为字节数组类型
             byte[] decoded = Base64.decodeBase64(publicKeyString);
+            //将获得的公钥密钥字节数组再转换为公钥对象
             RSAPublicKey pubKey = (RSAPublicKey) KeyFactory.getInstance("RSA").generatePublic(new X509EncodedKeySpec(decoded));
             //RSA加密
             Cipher cipher = Cipher.getInstance("RSA");

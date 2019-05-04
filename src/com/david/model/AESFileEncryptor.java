@@ -38,7 +38,7 @@ public class AESFileEncryptor {
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFileName);
 
             //秘钥自动生成
-            System.out.println("...正在生成密钥对！");
+            System.out.println("...正在生成密钥！");
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(128);
             Key key = keyGenerator.generateKey();
@@ -46,8 +46,8 @@ public class AESFileEncryptor {
             byte[] keyValue = key.getEncoded();
             //记录输入的加密密码的消息摘要
             fileOutputStream.write(keyValue);
-            //加密秘钥
-            System.out.println("...正在加密密钥对！");
+            //恢复秘钥
+            System.out.println("...正在加密密钥！");
             SecretKeySpec encryKey = new SecretKeySpec(keyValue, "AES");
 
             byte[] ivValue=new byte[16];
@@ -59,6 +59,7 @@ public class AESFileEncryptor {
             fileOutputStream.write("AESFileEncryptor".getBytes());
             //记录IV
             fileOutputStream.write(ivValue);
+
             Cipher cipher = Cipher.getInstance("AES/CFB/PKCS5Padding");
             cipher.init(cipher.ENCRYPT_MODE, encryKey, iv);
             System.out.println("...正在加密文件!");

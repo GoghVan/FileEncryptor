@@ -57,7 +57,7 @@ public class PICEncryptor {
         // 获取图像像素矩阵的行数(width)与列数(height)
         System.out.println("...正在提取图片像素！");
         BufferedImage bufferedImage = ImageIO.read(new File(fileName));
-        // 获取图向像素行数与列数
+        // 获取图像像素行数与列数
         int width = bufferedImage.getWidth();
         int height = bufferedImage.getHeight();
         // 获取图像像素矩阵
@@ -109,7 +109,7 @@ public class PICEncryptor {
         // 像素矩阵转二维
         int [][] pixels = new int[height][width];
         arrayFunctions.change(pixel, pixels, height, width);
-        // 进行图像加密
+        // 进行图像解密
         System.out.println("...正在解密图像！");
         myAlgorithms.decrypt(pixels, 0.01, height, width);
         // 加密后图像降一维

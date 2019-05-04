@@ -19,10 +19,10 @@ public class ArrayFunctions {
 	{
 		int k = 0;
 		for (int i = 0; i < M; ++i)
-		for (int j = 0; j < N; ++j)
-		{
-			arr2[i][j] = arr1[k++];
-		}
+			for (int j = 0; j < N; ++j)
+			{
+				arr2[i][j] = arr1[k++];
+			}
 
 	}
 	//把二维数组行列倒换

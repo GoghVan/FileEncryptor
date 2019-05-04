@@ -7,7 +7,7 @@ public class MyAlgorithms {
 	//加解密时使用，选择法排序，同时生成地址映射表
 	public static void SelectSort(double arr[], int length, HashMap m, int address_arr[])
 	{
-		if (arr == null || length <= 0)return;
+		if (arr == null || length <= 0) return;
 		int index = 0;
 		for (int i = 0; i < length; ++i)
 		{
@@ -55,7 +55,7 @@ public class MyAlgorithms {
 		for (int i = 1; i < N; ++i)
 		{
 			//arr[i] = 1 - 2*(arr[i - 1] * arr[i - 1]);
-			arr[i] = u*arr[i - 1] * (1 - arr[i - 1]);
+			arr[i] = u * arr[i - 1] * (1 - arr[i - 1]);
 		}
 	}
 
@@ -73,23 +73,23 @@ public class MyAlgorithms {
 	//行置乱算法
 	public double rowEncrypt(int pixel[][], double x1, int i,int M, int N)
 	{
-		ArrayFunctions af=new ArrayFunctions();
+		ArrayFunctions af = new ArrayFunctions();
 		//生成混沌序列
 		double logistic_array[] = new double[N] ;
 		produce_logisticArray(x1, logistic_array, N);
 		//建立值与下标映射的Map
-		HashMap m=new HashMap<String , Double>();
+		HashMap m = new HashMap<String , Double>();
 		produce_map(m, logistic_array, N);
 		//拷贝混沌序列
-		double temp_logArr[]=new double[N];
+		double temp_logArr[] = new double[N];
 		af.arr_copy(logistic_array, temp_logArr, N);
 
-		int address_array[]=new int[N];
+		int address_array[] = new int[N];
 		//对混沌序列进行排序，采用选择，并且同时生产地址映射表
 		SelectSort(temp_logArr, N, m, address_array);
 		//QSort(temp_logArr, N, m, 0, N - 1, address_array);
 
-		//用一个暂存数组保存被置乱后的象素数组
+		//用一个暂存数组保存被置乱后的像素数组
 		int temp[]=new int[N];
 		for (int j = 0; j < N; ++j)
 		{
@@ -102,6 +102,7 @@ public class MyAlgorithms {
 		}
 		return logistic_array[N - 1];
 	}
+
 	//行置乱接口
 	public void rowEncrypt_interface(int pixel[][], double x1, int M, int N)
 	{
@@ -112,6 +113,7 @@ public class MyAlgorithms {
 			x = rowEncrypt(pixel, x, i, M,N);
 		}
 	}
+
 	//列置乱算法
 	public double columnEncrypt(int pixel[][], double x1, int i,int M, int N)
 	{
@@ -143,6 +145,7 @@ public class MyAlgorithms {
 
 		return logistic_array[N - 1];
 	}
+
 	//列置乱接口
 	public void columnEncrypt_interface(int pixel[][], double x1, int M, int N)
 	{
@@ -246,6 +249,7 @@ public class MyAlgorithms {
 
 		return logistic_array[N - 1];
 	}
+
 	//列解密接口
 	public void columnDecrypt_interface(int pixel[][], double x1, int M, int N)
 	{
