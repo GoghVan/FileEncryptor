@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: Gavin
-  Date: 2019/4/22
-  Time: 9:36
+  Date: 2019/5/13
+  Time: 10:46
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -19,10 +19,10 @@
 </script>
 <html>
 <head>
-    <title>fail</title>
+    <title>success</title>
 </head>
 <body onload="aaa()">
-文件加解密失败！<br>
+文件加解密成功！<br>
 <span id="bb" style="color:red;">time </span>秒后将自动跳转到系统首页。
 <br>
 </body>

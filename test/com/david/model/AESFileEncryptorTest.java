@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
  * Created by Gavin on 2019/4/21.
  */
 public class AESFileEncryptorTest {
-    String str1 = "F:/ShoolData/test/before.txt";
-    String str2 = "F:/ShoolData/test/after.txt";
-    String str3 = "F:/ShoolData/test/final.txt";
+    String str1 = "G:/TestFile/AES/start.txt";
+    String str2 = "G:/TestFile/AES/middle.txt";
+    String str3 = "G:/TestFile/AES/end.txt";
 
     @Test
     public void encryptFile() throws Exception {

@@ -17,8 +17,7 @@ import java.security.spec.X509EncodedKeySpec;
 public class RSAFileEncryptor {
 
     // 默认RSAKey.xml文件存放处
-    static String RSAKeyFile = "F:/ShoolData/大四学习安排/毕业设计" +
-            "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/RSAKey.xml";
+    static String RSAKeyFile = "F:/ShoolData/大四学习安排/毕业设计/文件加密与隐藏工具设计与实现/代码实现/secret/src/com/txt/RSAKey.xml";
 
     /**
      * 随机生成密钥对并存到RSAKey.xml文件中
