@@ -14,14 +14,14 @@
 
     <package name="struts1" extends="struts-default">
         <action name="FileEncryptorAction" class="com.david.action.FileEncryptorAction">
-            <result name="success">success.jsp</result>
-            <result name="fail">fail.jsp</result>
+            <result name="success">/success.jsp</result>
+            <result name="fail">/fail.jsp</result>
         </action>
     </package>
     <package name="struts2" extends="struts-default">
         <action name="FileDencryptorAction" class="com.david.action.FileDencryptorAction">
-            <result name="success">success.jsp</result>
-            <result name="fail">fail.jsp</result>
+            <result name="success">/success.jsp</result>
+            <result name="fail">/fail.jsp</result>
         </action>
     </package>
 </struts>

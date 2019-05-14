@@ -101,24 +101,25 @@ public class FileEncryptorAction extends ActionSupport {
                 AESFileEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
-                return "success";
+                break;
             case "ECC":
                 ECCFileEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
-                return "success";
+                break;
             case "RSA":
                 RSAFileEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
-                return "success";
+                break;
             case "PIC":
                 PICEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
-                return "success";
+                break;
             default:
                 return "fail";
         }
+        return "success";
     }
 }
