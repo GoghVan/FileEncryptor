@@ -32,7 +32,7 @@ public class AESFileEncryptor {
     @SuppressWarnings("static-access")
     public static void encryptFile(String fileName,String encryptedFileName){
         try {
-            System.out.println("...开始加密文件！");
+            System.out.println("\n\n\n...开始加密文件！");
             System.out.println("...正在读取待加密文件！");
             FileInputStream fileInputStream = new FileInputStream(fileName);
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFileName);

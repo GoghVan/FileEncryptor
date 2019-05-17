@@ -42,8 +42,6 @@ public class ECCFileEncryptor{
                 stringBuffer.append(line);
             }
             String data = new String(stringBuffer);
-
-            System.out.println("...正在加密 " + fileName + " 文件!");
             // 将源文件加密并存入文件
             byte [] encryptFile = ECCUtil.encrypt(data.getBytes("UTF-8"), publicKey);// 编码问题注意！！！
             // 将byte[]类型转换成StringBuffer类型，方便后续操作
@@ -138,13 +136,11 @@ public class ECCFileEncryptor{
             decryptedFile[i] = (byte)Integer.parseInt(strings[i]);
         }
         try {
-            System.out.println("...正在解密 " + encryptedFileName + " 文件!");
             // 将加密文件进行解密
             fileWriter=new FileWriter(file2);
             String str=new String(ECCUtil.decrypt(decryptedFile, privateKey));
             fileWriter.write(str);
             fileWriter.close();
-            System.out.println("...文件解密完成!" + "解密文件存放在" + decryptedFileName + "中，请注意查收！");
         } catch (Exception e) {
             System.out.println("...文件解密失败！");
             e.printStackTrace();

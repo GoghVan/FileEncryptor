@@ -31,16 +31,16 @@ public class RSAFileEncryptor {
             keyPairGen.initialize(1024,new SecureRandom());
             // 生成一个密钥对，保存在keyPair中
             KeyPair keyPair = keyPairGen.generateKeyPair();
-            System.out.println("密钥对已产生！");
+            System.out.println("...密钥对已产生！");
             // 打开文件输入流
             FileOutputStream fileOutputStream = new FileOutputStream(RSAKeyFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             //将密钥对keypair存入RSAKey.xml文件中
             objectOutputStream.writeObject(keyPair);
             objectOutputStream.close();
-            System.out.println("密钥对已存入RSAKey.xml文件中！");
+            System.out.println("...密钥对已存入RSAKey.xml文件中！");
         }catch (Exception e){
-            System.out.println("密钥未存入RSAKey.xml文件中！");
+            System.out.println("...密钥未存入RSAKey.xml文件中！");
             e.printStackTrace();
         }
     }
@@ -57,9 +57,9 @@ public class RSAFileEncryptor {
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             keyPair = (KeyPair)objectInputStream.readObject(); //读出密钥对
             objectInputStream.close();
-            System.out.println("秘钥对已取出！");
+            System.out.println("...秘钥对已取出！");
         }catch (Exception e){
-            System.out.println("读取密钥对出错！");
+            System.out.println("...读取密钥对出错！");
             e.printStackTrace();
         }
         return keyPair;
@@ -101,9 +101,9 @@ public class RSAFileEncryptor {
             }
             cis.close();
             fileOutputStream.close();
-            System.out.println("文件加密成功！");
+            System.out.println("...文件加密成功！");
         }catch (Exception e){
-            System.out.println("文件加密失败！");
+            System.out.println("...文件加密失败！");
             throw e;
         }finally {
             try {
@@ -114,7 +114,7 @@ public class RSAFileEncryptor {
                     fileInputStream.close();
                 }
             }catch (Exception e){
-                System.out.println("源文件关闭失败!");
+                System.out.println("...源文件关闭失败!");
                 e.printStackTrace();
             }
         }
@@ -155,10 +155,10 @@ public class RSAFileEncryptor {
             }
             cis.close();
             fileOutputStream.close();
-            System.out.println("加密文件解密成功!");
+            System.out.println("...加密文件解密成功!");
 
         }catch (Exception e){
-            System.out.println("加密文件解密失败!");
+            System.out.println("...加密文件解密失败!");
             throw e;
         }finally {
             try {
