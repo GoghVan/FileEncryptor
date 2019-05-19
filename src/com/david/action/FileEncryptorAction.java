@@ -75,7 +75,7 @@ public class FileEncryptorAction extends ActionSupport {
         // 文件暂存位置
 //        String encryptedFileName = "F:/ShoolData/大四学习安排/毕业设计" +
 //                "/文件加密与隐藏工具的加密与实现/代码实现/secret/src/com/txt/middle" + expandedName;
-
+        System.out.println("\n\n\n...文件加密开始！");
         // 打开文件输入流与输出流
         InputStream inputStream = new FileInputStream(file);
         OutputStream outputStream = new FileOutputStream(filename);
@@ -94,32 +94,39 @@ public class FileEncryptorAction extends ActionSupport {
         }
         File file1 = new File(filename);
 //        File file2 = new File(encryptedFileName);
-
+        int flag = 0;
         // 选择加密模块
         switch (encryptorType){
             case "AES":
-                AESFileEncryptor.encryptFile(filename, encryptedFileAddress);
+                flag = AESFileEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
                 break;
             case "ECC":
-                ECCFileEncryptor.encryptFile(filename, encryptedFileAddress);
+                flag = ECCFileEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
                 break;
             case "RSA":
-                RSAFileEncryptor.encryptFile(filename, encryptedFileAddress);
+                flag = RSAFileEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
                 break;
             case "PIC":
-                PICEncryptor.encryptFile(filename, encryptedFileAddress);
+                flag = PICEncryptor.encryptFile(filename, encryptedFileAddress);
                 if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
                 break;
             default:
                 return "fail";
         }
-        return "success";
+        if (flag == 1){
+            System.out.println("...文件加密完成！");
+            return "success";
+        }else {
+            System.out.println("...文件加密失败！");
+            return "fail";
+        }
+
     }
 }

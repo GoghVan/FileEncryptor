@@ -1,14 +1,12 @@
 package com.david.test;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.*;
 
 /**
  * Created by Gavin on 2019/4/20.
  */
 public class test {
+
     public static void pictureEncryption(String fileName,String encryptedFileName) throws Exception{
         BufferedInputStream bis = null;
         BufferedOutputStream bos = null;

@@ -30,9 +30,9 @@ public class AESFileEncryptor {
      * encryptedFileName:加密完文件路径("G:/test/middle.txt")
      */
     @SuppressWarnings("static-access")
-    public static void encryptFile(String fileName,String encryptedFileName){
+    public static int encryptFile(String fileName,String encryptedFileName){
         try {
-            System.out.println("\n\n\n...开始加密文件！");
+            System.out.println("\n\n\n...文件开始 AES 算法加密！");
             System.out.println("...正在读取待加密文件！");
             FileInputStream fileInputStream = new FileInputStream(fileName);
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFileName);
@@ -72,31 +72,12 @@ public class AESFileEncryptor {
             }
             cis.close();
             fileOutputStream.close();
-            System.out.println("...文件加密完成! 请注意查收！");
-        } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
+            System.out.println("...文件加密完成!");
+            return 1;
+        } catch (Exception e) {
             System.out.println("...文件加密失败！");
             e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            System.out.println("...文件加密失败！");
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            System.out.println("...文件加密失败！");
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
-            System.out.println("...文件加密失败！");
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            // TODO Auto-generated catch block
-            System.out.println("...文件加密失败！");
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            System.out.println("...文件加密失败！");
-            e.printStackTrace();
+            return 0;
         }
 
     }
@@ -109,10 +90,10 @@ public class AESFileEncryptor {
      */
 
     @SuppressWarnings("static-access")
-    public static void decryptedFile(String encryptedFileName,String decryptedFileName){
+    public static int decryptedFile(String encryptedFileName,String decryptedFileName){
 
         try {
-            System.out.println("...开始解密文件！");
+            System.out.println("\n\n\n...文件开始 AES 算法解密！");
             System.out.println("...正在读取待解密文件！");
             //文件输入流
             FileInputStream fileInputStream = new FileInputStream(encryptedFileName);
@@ -145,33 +126,18 @@ public class AESFileEncryptor {
                 fileOutputStream.close();
                 //跳出提示框
                 //JOptionPane.showMessageDialog(null, "解密成功");
-                System.out.println("...加密文件解密成功!");
+                System.out.println("...文件解密成功!");
+                return 1;
             }else{
-                System.out.println("...加密文件解密失败！");
+                System.out.println("...文件解密失败！");
+                return 0;
                 //跳出提示框
                 //JOptionPane.showMessageDialog(null, "文件不是我加密的，爱找谁着谁去");
             }
-        } catch (InvalidKeyException e) {
-            // TODO Auto-generated catch block
+        } catch (Exception e) {
+            System.out.println("...文件解密失败！");
             e.printStackTrace();
-        } catch (HeadlessException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchAlgorithmException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (NoSuchPaddingException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (InvalidAlgorithmParameterException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            return 0;
         }
     }
 }

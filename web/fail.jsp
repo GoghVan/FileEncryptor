@@ -8,7 +8,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <meta http-equiv="refresh" content='5; url=http://localhost:8888/index.jsp'>
 <script type="text/javascript">
-    var time =5;
+    var time = 5;
     function  aaa()
     {
         window.setTimeout('aaa()', 1000);
@@ -25,7 +25,7 @@
 <center>
     <strong>
         <br><br><br><br><br><br><br><br><br><br><br><br>
-        文件加解密失败！<br><br>
+        文件加密/解密<h1>失败</h1>
         <span id="bb" style="color:red;">time </span>秒后将自动跳转到系统首页。
         <br>
     </strong>

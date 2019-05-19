@@ -18,17 +18,16 @@ public class ECCFileEncryptor{
      * @param encryptedFileName 加密后文件的地址
      * @throws Exception 抛出异常
      */
-    public static void encryptFile(String fileName,String encryptedFileName) throws Exception{
+    public static int encryptFile(String fileName,String encryptedFileName) throws Exception{
         // 产生秘钥对
         GenerateKey.saveKeyPair();
-
         // 文件加密
-        System.out.println("...开始加密文件！");
+        System.out.println("\n\n\n...文件开始 ECC 算法加密！");
         BufferedReader bufferedReader = null;
         StringBuffer stringBuffer = null;
         StringBuffer stringBuffer1 = null;
         try{
-            System.out.println("...正在取出publicKey!");
+            System.out.println("...正在取出公共密钥!");
             // 取出公共秘钥
             Map<String,String> map = GenerateKey.getGenerateKey();
             String publicKey = map.get(ECCEnum.PUBLIC_KEY.value());
@@ -42,6 +41,7 @@ public class ECCFileEncryptor{
                 stringBuffer.append(line);
             }
             String data = new String(stringBuffer);
+            System.out.println("...正在加密文件！");
             // 将源文件加密并存入文件
             byte [] encryptFile = ECCUtil.encrypt(data.getBytes("UTF-8"), publicKey);// 编码问题注意！！！
             // 将byte[]类型转换成StringBuffer类型，方便后续操作
@@ -62,23 +62,13 @@ public class ECCFileEncryptor{
 //                fileWriter.write(String.valueOf((int) i));
 //            }
 //            fileWriter.flush();
-
-            System.out.println("...文件加密完成!" + "加密文件存放在" + encryptedFileName + "中，请注意查收！");
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException ioe) {
-            ioe.printStackTrace();
+            bufferedReader.close();
+            System.out.println("...文件加密完成!");
+            return 1;
         }catch (Exception e){
             System.out.println("...文件加密失败！");
-            throw e;
-        }finally {
-            try {
-                bufferedReader.close();
-            }catch (Exception e){
-                System.out.println("...源文件关闭失败!");
-                e.printStackTrace();
-            }
+            e.printStackTrace();
+            return 0;
         }
     }
 
@@ -88,26 +78,26 @@ public class ECCFileEncryptor{
      * @param decryptedFileName 解密后文件的地址
      * @throws Exception 抛出异常
      */
-    public static void decryptedFile(String encryptedFileName,String decryptedFileName)throws Exception{
+    public static int decryptedFile(String encryptedFileName,String decryptedFileName)throws Exception{
 
         // 加密文件解密
         File file1 = new File(encryptedFileName);
         File file2 = new File(decryptedFileName);
 
-        System.out.println("...开始解密文件！");
+        System.out.println("\n\n\n...文件开始 ECC 算法解密！");
         FileWriter fileWriter = null;
         FileInputStream fileInputStream = null;
 
-        System.out.println("...正在取出privateKey!");
+        System.out.println("...正在取出私有密钥!");
         // 取出公共秘钥
         Map<String,String> map = GenerateKey.getGenerateKey();
         String privateKey = map.get(ECCEnum.PRIVATE_KEY.value());
 
-        System.out.println("...正在读取待解密文件！");
         // encryptedFileName文件的内容长度
         StringBuffer stringBuffer = new StringBuffer();
         BufferedReader bufferedReader = null;
         try {
+            System.out.println("...正在读取待解密文件！");
             bufferedReader = new BufferedReader(new FileReader(encryptedFileName));
             String str;
             // 逐行读取
@@ -122,6 +112,7 @@ public class ECCFileEncryptor{
         catch(Exception e){
             System.out.println("...读取文件失败！");
             System.out.println(e.getMessage());
+            return 0;
         }
         // 去除stringBuffer中的\n与\r字符
         StringBuffer buffer = new StringBuffer();
@@ -132,18 +123,22 @@ public class ECCFileEncryptor{
         String[] strings = buffer.toString().split(",");
         // 将String数组转换成byte数组
         byte[] decryptedFile = new byte[strings.length];
-        for(int i=0; i<strings.length; i++){
-            decryptedFile[i] = (byte)Integer.parseInt(strings[i]);
-        }
         try {
+            for(int i=0; i<strings.length; i++){
+                decryptedFile[i] = (byte)Integer.parseInt(strings[i]);
+            }
+            System.out.println("...正在解密文件！");
             // 将加密文件进行解密
             fileWriter=new FileWriter(file2);
             String str=new String(ECCUtil.decrypt(decryptedFile, privateKey));
             fileWriter.write(str);
             fileWriter.close();
+            System.out.println("...文件解密成功！");
+            return 1;
         } catch (Exception e) {
             System.out.println("...文件解密失败！");
             e.printStackTrace();
+            return 0;
         }
     }
 //        try {
