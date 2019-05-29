@@ -68,10 +68,17 @@ public class PICEncryptor {
             int [] pixel  = raster.getPixels(0, 0, raster.getWidth(), raster.getHeight(), temp);
             // 像素矩阵转二维
             int [][] pixels = new int[height][width];
+            System.out.println("hight: " + height);
+            System.out.println("width: " + width);
             arrayFunctions.change(pixel, pixels, height, width);
             // 进行图像加密
             System.out.println("...正在加密图像！");
-            myAlgorithms.encrypt(pixels, 0.01, height, width);
+            System.out.println("原始图像二维数组为：");
+            for (int i = 0; i < height; i++){
+                for (int j = 0; j < width; j++) System.out.print(pixels[i][j] + " ");
+                System.out.println();
+            }
+            myAlgorithms.encrypt(pixels, 0.05, height, width);
             // 加密后图像降一维
             arrayFunctions.recovery(pixels, pixel, height, width);
             // 生成加密后的图像
@@ -112,6 +119,8 @@ public class PICEncryptor {
             // 获取图向像素行数与列数
             int width = bufferedImage.getWidth();
             int height = bufferedImage.getHeight();
+            System.out.println("hight: " + height);
+            System.out.println("width: " + width);
             // 获取图像像素矩阵
             Raster raster = bufferedImage.getData();
             int[] temp = new int[raster.getWidth() * raster.getHeight() * raster.getNumBands()];
@@ -121,6 +130,11 @@ public class PICEncryptor {
             arrayFunctions.change(pixel, pixels, height, width);
             // 进行图像解密
             System.out.println("...正在解密图像！");
+            System.out.println("原始图像二维数组为：");
+            for (int i = 0; i < height; i++){
+                for (int j = 0; j < width; j++) System.out.print(pixels[i][j] + " ");
+                System.out.println();
+            }
             myAlgorithms.decrypt(pixels, 0.01, height, width);
             // 加密后图像降一维
             arrayFunctions.recovery(pixels, pixel, height, width);

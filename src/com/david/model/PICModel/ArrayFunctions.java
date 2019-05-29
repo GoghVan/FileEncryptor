@@ -8,10 +8,10 @@ public class ArrayFunctions {
 	{
 		int k = 0;
 		for (int i = 0; i < M; ++i)
-		for (int j = 0; j < N; ++j)
-		{
-			arr1[k++] = arr2[i][j];
-		}
+			for (int j = 0; j < N; ++j)
+			{
+				arr1[k++] = arr2[i][j];
+			}
 
 	}
 	//一维数组升二维
@@ -26,7 +26,7 @@ public class ArrayFunctions {
 
 	}
 	//把二维数组行列倒换
-	void arr_change(int arr[][],int temp[][], int M, int N)
+	public void arr_change(int arr[][],int temp[][], int M, int N)
 	{
 		for (int i = 0; i < M; ++i)
 		{
