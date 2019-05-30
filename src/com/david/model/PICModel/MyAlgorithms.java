@@ -47,19 +47,19 @@ public class MyAlgorithms {
 			address_arr[address] = i;
 		}
 
-		System.out.println("这里是SelectSort模块：");
-		System.out.print("这里是SelectSort模块，其中arr[]为：");
-		for (int i = 0; i < arr.length; i++) System.out.print("(" + i + " ," + arr[i] + "),");
-		System.out.println();
-		System.out.print("这里是SelectSort模块，其中address_arr[]为：");
-		for (int i = 0; i < address_arr.length; i++) System.out.print("(" + i + " ," + address_arr[i] + "),");
-		System.out.println();
+//		System.out.println("这里是SelectSort模块：");
+//		System.out.print("这里是SelectSort模块，其中arr[]为：");
+//		for (int i = 0; i < arr.length; i++) System.out.print("(" + i + " ," + arr[i] + "),");
+//		System.out.println();
+//		System.out.print("这里是SelectSort模块，其中address_arr[]为：");
+//		for (int i = 0; i < address_arr.length; i++) System.out.print("(" + i + " ," + address_arr[i] + "),");
+//		System.out.println();
 	}
 
 	//生成一个混沌序列，以x为初值
 	public static void produce_logisticArray(double x, double arr[], int N)
 	{
-		System.out.println("这里是produce_logisticArray模块：");
+//		System.out.println("这里是produce_logisticArray模块：");
 		double u = 3.9999999;
 		arr[0] = x;
 		for (int i = 1; i < N; ++i)
@@ -67,9 +67,9 @@ public class MyAlgorithms {
 			//arr[i] = 1 - 2*(arr[i - 1] * arr[i - 1]);
 			arr[i] = u * arr[i - 1] * (1 - arr[i - 1]);
 		}
-		System.out.print("这里是produce_logisticArray模块，其中arr[]值为：");
-		for (int i = 0; i < arr.length; i ++) System.out.print("(" + i + " ," + arr[i] + "),");
-		System.out.println();
+//		System.out.print("这里是produce_logisticArray模块，其中arr[]值为：");
+//		for (int i = 0; i < arr.length; i ++) System.out.print("(" + i + " ," + arr[i] + "),");
+//		System.out.println();
 	}
 
 	//通过混沌序列，生成 值-下标 的反向映射
@@ -81,7 +81,7 @@ public class MyAlgorithms {
 //			m.insert(p);
 			hashMap.put(logistic_array[i], i);
 		}
-		System.out.println();
+//		System.out.println();
 	}
 	//行/列 置乱算法
 	public double rowColumnEncrypt(int pixel[][], double x1, int i,int M, int N)
@@ -106,30 +106,30 @@ public class MyAlgorithms {
 			temp[address_array[j]] = pixel[i][j];
 		}
 
-		System.out.print("这里是rowColumnEncrypt模块，其中temp[]值为：");
-		for (int r = 0; r < temp.length; r ++) System.out.print("(" + r + " ," + temp[r] + "),");
-		System.out.println();
-		System.out.print("这里是rowColumnEncrypt模块，其中address_array[]值为：");
-		for (int r = 0; r < address_array.length; r ++) System.out.print("(" + r + " ," + address_array[r] + "),");
-		System.out.println();
+//		System.out.print("这里是rowColumnEncrypt模块，其中temp[]值为：");
+//		for (int r = 0; r < temp.length; r ++) System.out.print("(" + r + " ," + temp[r] + "),");
+//		System.out.println();
+//		System.out.print("这里是rowColumnEncrypt模块，其中address_array[]值为：");
+//		for (int r = 0; r < address_array.length; r ++) System.out.print("(" + r + " ," + address_array[r] + "),");
+//		System.out.println();
 
 		//正式置乱原图
 		for (int j = 0; j < N; ++j)
 		{
 			pixel[i][j] = temp[j];
 		}
-		System.out.println("置乱后，pixel[][]值为：");
-		for (int v = 0; v < M; v++){
-			for (int j = 0; j < N; j++) System.out.print(pixel[v][j] + " ");
-			System.out.println();
-		}
+//		System.out.println("置乱后，pixel[][]值为：");
+//		for (int v = 0; v < M; v++){
+//			for (int j = 0; j < N; j++) System.out.print(pixel[v][j] + " ");
+//			System.out.println();
+//		}
 		return logistic_array[N - 1];
 	}
 
 	//行置乱接口
 	public void rowEncrypt_interface(int pixel[][], double x1, int M, int N)
 	{
-		System.out.println("这里是rowEncrypt_interface模块：");
+//		System.out.println("这里是rowEncrypt_interface模块：");
 		double x = x1;
 		//对每一行都进行置乱
 		for (int i = 0; i < M; ++i)
@@ -140,7 +140,7 @@ public class MyAlgorithms {
 	//列置乱接口
 	public void columnEncrypt_interface(int pixel[][], double x1, int M, int N)
 	{
-		System.out.println("这里是columnEncrypt_interface模块：");
+//		System.out.println("这里是columnEncrypt_interface模块：");
 		/*
 		由于置乱的算法是每行置乱，所以不能直接进行列置乱
 		要把当前二维数组转的行列转换
@@ -153,16 +153,16 @@ public class MyAlgorithms {
 		//行列互换
 		arrayFunctions.arr_change(pixel,temp, M, N);
 
-		System.out.println("这里是columnEncrypt_interface模块，其中pixel[][]值为：");
-		for (int i = 0; i < M; i++){
-			for (int j = 0; j < N; j++) System.out.print(pixel[i][j] + " ");
-			System.out.println();
-		}
-		System.out.print("这里是columnEncrypt_interface模块，其中temp[][]值为：");
-		for (int i = 0; i < N; i++){
-			for (int j = 0; j < M; j++) System.out.print(temp[i][j] + " ");
-			System.out.println();
-		}
+//		System.out.println("这里是columnEncrypt_interface模块，其中pixel[][]值为：");
+//		for (int i = 0; i < M; i++){
+//			for (int j = 0; j < N; j++) System.out.print(pixel[i][j] + " ");
+//			System.out.println();
+//		}
+//		System.out.print("这里是columnEncrypt_interface模块，其中temp[][]值为：");
+//		for (int i = 0; i < N; i++){
+//			for (int j = 0; j < M; j++) System.out.print(temp[i][j] + " ");
+//			System.out.println();
+//		}
 
 		double x = x1;
 		for (int i = 0; i < N; ++i)
@@ -173,11 +173,11 @@ public class MyAlgorithms {
 		//再次行列互换
 		arrayFunctions.arr_change(temp,temp2, N, M);
 
-		System.out.println("这里是columnEncrypt_interface模块，其中temp2[][]值为：");
-		for (int i = 0; i < M; i++){
-			for (int j = 0; j < N; j++) System.out.print(temp2[i][j] + " ");
-			System.out.println();
-		}
+//		System.out.println("这里是columnEncrypt_interface模块，其中temp2[][]值为：");
+//		for (int i = 0; i < M; i++){
+//			for (int j = 0; j < N; j++) System.out.print(temp2[i][j] + " ");
+//			System.out.println();
+//		}
 
 		//正式将原数组置乱
 		for (int i = 0; i < M; ++i)
@@ -214,23 +214,23 @@ public class MyAlgorithms {
 			temp[j] = pixel[i][address_array[j]];
 		}
 
-		System.out.print("这里是rowColumnDecrypt模块，其中temp[]值为：");
-		for (int r = 0; r < temp.length; r ++) System.out.print("(" + r + " ," + temp[r] + "),");
-		System.out.println();
-		System.out.print("这里是rowColumnDecrypt模块，其中address_array[]值为：");
-		for (int r = 0; r < address_array.length; r ++) System.out.print("(" + r + " ," + address_array[r] + "),");
-		System.out.println();
+//		System.out.print("这里是rowColumnDecrypt模块，其中temp[]值为：");
+//		for (int r = 0; r < temp.length; r ++) System.out.print("(" + r + " ," + temp[r] + "),");
+//		System.out.println();
+//		System.out.print("这里是rowColumnDecrypt模块，其中address_array[]值为：");
+//		for (int r = 0; r < address_array.length; r ++) System.out.print("(" + r + " ," + address_array[r] + "),");
+//		System.out.println();
 
 		//正式解密原图
 		for (int j = 0; j < N; ++j)
 		{
 			pixel[i][j] = temp[j];
 		}
-		System.out.println("解密后，pixel[][]值为：");
-		for (int v = 0; v < M; v++){
-			for (int j = 0; j < N; j++) System.out.print(pixel[v][j] + " ");
-			System.out.println();
-		}
+//		System.out.println("解密后，pixel[][]值为：");
+//		for (int v = 0; v < M; v++){
+//			for (int j = 0; j < N; j++) System.out.print(pixel[v][j] + " ");
+//			System.out.println();
+//		}
 		return logistic_array[N - 1];
 	}
 
@@ -238,7 +238,7 @@ public class MyAlgorithms {
 	//行解密接口
 	public void rowDecrypt_interface(int pixel[][], double x1, int M, int N)
 	{
-		System.out.println("这里是rowDecrypt_interface模块：");
+//		System.out.println("这里是rowDecrypt_interface模块：");
 		double x = x1;
 		for (int i = 0; i < M; ++i)
 		{
@@ -249,7 +249,7 @@ public class MyAlgorithms {
 	//列解密接口
 	public void columnDecrypt_interface(int pixel[][], double x1, int M, int N)
 	{
-		System.out.println("这里是columnDecrypt_interface模块：");
+//		System.out.println("这里是columnDecrypt_interface模块：");
 		/*
 		由于置乱的算法是每行置乱，所以不能直接进行列置乱
 		要把当前二维数组转的行列转换
@@ -262,16 +262,16 @@ public class MyAlgorithms {
 		//行列互换
 		arrayFunctions.arr_change(pixel, temp, M, N);
 
-		System.out.println("这里是columnEncrypt_interface模块，其中pixel[][]值为：");
-		for (int i = 0; i < M; i++){
-			for (int j = 0; j < N; j++) System.out.print(pixel[i][j] + " ");
-			System.out.println();
-		}
-		System.out.print("这里是columnEncrypt_interface模块，其中temp[][]值为：");
-		for (int i = 0; i < N; i++){
-			for (int j = 0; j < M; j++) System.out.print(temp[i][j] + " ");
-			System.out.println();
-		}
+//		System.out.println("这里是columnEncrypt_interface模块，其中pixel[][]值为：");
+//		for (int i = 0; i < M; i++){
+//			for (int j = 0; j < N; j++) System.out.print(pixel[i][j] + " ");
+//			System.out.println();
+//		}
+//		System.out.print("这里是columnEncrypt_interface模块，其中temp[][]值为：");
+//		for (int i = 0; i < N; i++){
+//			for (int j = 0; j < M; j++) System.out.print(temp[i][j] + " ");
+//			System.out.println();
+//		}
 
 		double x = x1;
 		for (int i = 0; i < N; ++i)
@@ -283,11 +283,11 @@ public class MyAlgorithms {
 		//再次行列互换
 		arrayFunctions.arr_change(temp, temp2, N, M);
 
-		System.out.print("这里是columnEncrypt_interface模块，其中temp2[][]值为：");
-		for (int i = 0; i < M; i++){
-			for (int j = 0; j < N; j++) System.out.print(temp2[i][j] + " ");
-			System.out.println();
-		}
+//		System.out.print("这里是columnEncrypt_interface模块，其中temp2[][]值为：");
+//		for (int i = 0; i < M; i++){
+//			for (int j = 0; j < N; j++) System.out.print(temp2[i][j] + " ");
+//			System.out.println();
+//		}
 
 		//正式对像素数组解密
 		for (int i = 0; i < M; ++i)

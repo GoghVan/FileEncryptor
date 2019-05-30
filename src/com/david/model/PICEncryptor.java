@@ -62,32 +62,47 @@ public class PICEncryptor {
             // 获取图像像素行数与列数
             int width = bufferedImage.getWidth();
             int height = bufferedImage.getHeight();
+//            System.out.println("hight: " + height);
+//            System.out.println("width: " + width);
             // 获取图像像素矩阵
-            Raster raster = bufferedImage.getData();
-            int [] temp = new int[raster.getWidth() * raster.getHeight() * raster.getNumBands()];
-            int [] pixel  = raster.getPixels(0, 0, raster.getWidth(), raster.getHeight(), temp);
-            // 像素矩阵转二维
-            int [][] pixels = new int[height][width];
-            System.out.println("hight: " + height);
-            System.out.println("width: " + width);
-            arrayFunctions.change(pixel, pixels, height, width);
-            // 进行图像加密
-            System.out.println("...正在加密图像！");
+//            Raster raster = bufferedImage.getData();
+//            int [] temp = new int[raster.getWidth() * raster.getHeight() * raster.getNumBands()];
+//            int [] pixel  = raster.getPixels(0, 0, raster.getWidth(), raster.getHeight(), temp);
+//            // 像素矩阵转二维
+//            int [][] pixels = new int[height][width];
+//            arrayFunctions.change(pixel, pixels, height, width);
+            // 获取图像像素矩阵
+//            int [] pixel = new int[width * height];
+            int [][] pixels_1 = new int[width][height];
             System.out.println("原始图像二维数组为：");
-            for (int i = 0; i < height; i++){
-                for (int j = 0; j < width; j++) System.out.print(pixels[i][j] + " ");
-                System.out.println();
+            for (int i = 0; i < width; i ++){
+                for (int j = 0; j < height; j ++){
+                    pixels_1[i][j] = bufferedImage.getRGB(i,j) & 0xFFFFFF;
+//                    System.out.print(pixels_1[i][j] + " ");
+                }
+//                System.out.println();
             }
+            int [][] pixels = new int[height][width];
+            // 转置
+            arrayFunctions.arr_change(pixels_1,pixels,width,height);
+
+            System.out.println("...正在加密图像！");
             myAlgorithms.encrypt(pixels, 0.05, height, width);
             // 加密后图像降一维
-            arrayFunctions.recovery(pixels, pixel, height, width);
+//            arrayFunctions.recovery(pixels, pixel, height, width);
+            // 转置
+            arrayFunctions.arr_change(pixels,pixels_1,height,width);
             // 生成加密后的图像
             BufferedImage bufferedImage1 = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//        int [] rgb = new int[width * height];
-//        for (int i = 0; i < rgb.length; i++){
-//            rgb[i] = Color.white.getRGB();
-//        }
-            bufferedImage1.setRGB(0, 0, width, height, pixel, 0, width);
+//            bufferedImage1.setRGB(0, 0, width, height, pixel, 0, width);
+//            System.out.println("加密图像二维数组为：");
+            for(int x = 0; x < width; x++){
+                for(int y = 0; y < height; y++){
+                    bufferedImage1.setRGB(x,y,pixels_1[x][y]);
+//                    System.out.print(pixels_1[x][y] + " ");
+                }
+//                System.out.println();
+            }
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFileName);
             JPEGImageEncoder jpegImageEncoder = JPEGCodec.createJPEGEncoder(fileOutputStream);
             jpegImageEncoder.encode(bufferedImage1);
@@ -119,32 +134,47 @@ public class PICEncryptor {
             // 获取图向像素行数与列数
             int width = bufferedImage.getWidth();
             int height = bufferedImage.getHeight();
-            System.out.println("hight: " + height);
-            System.out.println("width: " + width);
+//            System.out.println("hight: " + height);
+//            System.out.println("width: " + width);
             // 获取图像像素矩阵
-            Raster raster = bufferedImage.getData();
-            int[] temp = new int[raster.getWidth() * raster.getHeight() * raster.getNumBands()];
-            int[] pixel = raster.getPixels(0, 0, raster.getWidth(), raster.getHeight(), temp);
-            // 像素矩阵转二维
-            int[][] pixels = new int[height][width];
-            arrayFunctions.change(pixel, pixels, height, width);
+//            Raster raster = bufferedImage.getData();
+//            int[] temp = new int[raster.getWidth() * raster.getHeight() * raster.getNumBands()];
+//            int[] pixel = raster.getPixels(0, 0, raster.getWidth(), raster.getHeight(), temp);
+//            // 像素矩阵转二维
+//            int[][] pixels = new int[height][width];
+//            arrayFunctions.change(pixel, pixels, height, width);
+            // 获取图像像素矩阵
+//            int [] pixel = new int[width * height];
+            int [][] pixels_1 = new int[width][height];
+            for (int i = 0; i < width; i ++){
+                for (int j = 0; j < height; j ++){
+                    pixels_1[i][j] = bufferedImage.getRGB(i,j) & 0xFFFFFF;
+                }
+            }
+            int [][] pixels = new int[height][width];
+            arrayFunctions.arr_change(pixels_1,pixels,width,height);
             // 进行图像解密
             System.out.println("...正在解密图像！");
-            System.out.println("原始图像二维数组为：");
-            for (int i = 0; i < height; i++){
-                for (int j = 0; j < width; j++) System.out.print(pixels[i][j] + " ");
-                System.out.println();
-            }
-            myAlgorithms.decrypt(pixels, 0.01, height, width);
+//            System.out.println("原始图像二维数组为：");
+//            for (int i = 0; i < height; i++){
+//                for (int j = 0; j < width; j++) System.out.print(pixels[i][j] + " ");
+//                System.out.println();
+//            }
+
+            myAlgorithms.decrypt(pixels, 0.05, height, width);
             // 加密后图像降一维
-            arrayFunctions.recovery(pixels, pixel, height, width);
+//            arrayFunctions.recovery(pixels, pixel, height, width);
             // 生成加密后的图像
+            arrayFunctions.arr_change(pixels,pixels_1,height,width);
             BufferedImage bufferedImage1 = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-//        int [] rgb = new int[width * height];
-//        for (int i = 0; i < rgb.length; i++){
-//            rgb[i] = Color.white.getRGB();
-//        }
-            bufferedImage1.setRGB(0, 0, width, height, pixel, 0, width);
+//            bufferedImage1.setRGB(0, 0, width, height, pixel, 0, width);
+            for(int x = 0; x< width; x++){
+                for(int y = 0; y< height; y++){
+                    bufferedImage1.setRGB(x,y,pixels_1[x][y]);
+//                    System.out.print(pixels_1[x][y] + " ");
+                }
+//                System.out.println();
+            }
             FileOutputStream fileOutputStream = new FileOutputStream(decryptedFileName);
             JPEGImageEncoder jpegImageEncoder = JPEGCodec.createJPEGEncoder(fileOutputStream);
             jpegImageEncoder.encode(bufferedImage1);
