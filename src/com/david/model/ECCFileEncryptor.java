@@ -43,7 +43,7 @@ public class ECCFileEncryptor{
             String data = new String(stringBuffer);
             System.out.println("...正在加密文件！");
             // 将源文件加密并存入文件
-            byte [] encryptFile = ECCUtil.encrypt(data.getBytes("UTF-8"), publicKey);// 编码问题注意！！！
+            byte [] encryptFile = ECCUtil.encrypt(data.getBytes("GBK"), publicKey);// 编码问题注意！！！
             // 将byte[]类型转换成StringBuffer类型，方便后续操作
             stringBuffer1 = new StringBuffer();
             for (byte i : encryptFile) {

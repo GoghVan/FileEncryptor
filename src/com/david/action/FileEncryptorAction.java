@@ -64,12 +64,10 @@ public class FileEncryptorAction extends ActionSupport {
         this.fileFileName = fileFileName;
     }
 
-    // 文件暂存位置
-    String filename = "F:\\ShoolData\\大四学习安排\\毕业设计\\文件加密与隐藏工具设计与实现\\代码实现\\secret\\src\\com\\txt" + fileFileName;
-
     @Override
     public String execute() throws Exception {
-
+        // 文件暂存位置
+        String filename = "F:\\ShoolData\\大四学习安排\\毕业设计\\文件加密与隐藏工具设计与实现\\代码实现\\secret\\src\\com\\txt\\" + getFileFileName();
         // 上传文件扩展名
 //        String expandedName = fileFileName.substring(fileFileName.lastIndexOf("."));
         // 文件暂存位置
@@ -79,7 +77,7 @@ public class FileEncryptorAction extends ActionSupport {
         // 打开文件输入流与输出流
         InputStream inputStream = new FileInputStream(file);
         OutputStream outputStream = new FileOutputStream(filename);
-
+//        OutputStreamWriter outputStreamWriter = new OutputStreamWriter(new FileOutputStream(filename),"GBK");
         try {
             byte[] buffer = new byte[(int) file.length()];
             while (inputStream.read(buffer) > 0) {
@@ -104,7 +102,7 @@ public class FileEncryptorAction extends ActionSupport {
                 break;
             case "ECC":
                 flag = ECCFileEncryptor.encryptFile(filename, encryptedFileAddress);
-                if (file1.exists()) file1.delete();
+//                if (file1.exists()) file1.delete();
 //                if (file2.exists()) file2.delete();
                 break;
             case "RSA":
