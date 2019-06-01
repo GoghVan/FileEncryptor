@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
  * Created by Gavin on 2019/4/21.
  */
 public class PICEncryptorTest {
-    String str1 = "G:/TestFile/PIC/start3.jpg";
-    String str2 = "G:/TestFile/PIC/middle3.jpg";
-    String str3 = "G:/TestFile/PIC/end3.jpg";
+    String str1 = "G:/TestFile/PIC/start.png";
+    String str2 = "G:/TestFile/PIC/middle.png";
+    String str3 = "G:/TestFile/PIC/end.png";
     @Test
     public void encryptFile() throws Exception {
         System.out.println("encryptFile start:");
