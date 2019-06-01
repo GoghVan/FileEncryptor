@@ -32,39 +32,29 @@ public class AESFileEncryptor {
     @SuppressWarnings("static-access")
     public static int encryptFile(String fileName,String encryptedFileName){
         try {
-            System.out.println("\n\n\n...文件开始 AES 算法加密！");
-            System.out.println("...正在读取待加密文件！");
             FileInputStream fileInputStream = new FileInputStream(fileName);
             FileOutputStream fileOutputStream = new FileOutputStream(encryptedFileName);
-
-            //秘钥自动生成
-            System.out.println("...正在生成密钥！");
+            // 秘钥自动生成
             KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
             keyGenerator.init(128);
             Key key = keyGenerator.generateKey();
-
             byte[] keyValue = key.getEncoded();
-            //记录输入的加密密码的消息摘要
+            // 记录输入的加密密码的消息摘要
             fileOutputStream.write(keyValue);
-            //恢复秘钥
-            System.out.println("...正在加密密钥！");
+            // 恢复秘钥
             SecretKeySpec encryKey = new SecretKeySpec(keyValue, "AES");
-
             byte[] ivValue=new byte[16];
             Random random = new Random(System.currentTimeMillis());
             random.nextBytes(ivValue);
-            //获取系统时间作为IV
+            // 获取系统时间作为IV
             IvParameterSpec iv = new IvParameterSpec(ivValue);
-            //文件标识符
+            // 文件标识符
             fileOutputStream.write("AESFileEncryptor".getBytes());
-            //记录IV
+            // 记录IV
             fileOutputStream.write(ivValue);
-
             Cipher cipher = Cipher.getInstance("AES/CFB/PKCS5Padding");
             cipher.init(cipher.ENCRYPT_MODE, encryKey, iv);
-            System.out.println("...正在加密文件!");
             CipherInputStream cis = new CipherInputStream(fileInputStream, cipher);
-
             byte[] buffer = new byte[1024];
             int n = 0;
             while((n = cis.read(buffer))!= -1){
@@ -72,10 +62,8 @@ public class AESFileEncryptor {
             }
             cis.close();
             fileOutputStream.close();
-            System.out.println("...文件加密完成!");
             return 1;
         } catch (Exception e) {
-            System.out.println("...文件加密失败！");
             e.printStackTrace();
             return 0;
         }
@@ -88,13 +76,10 @@ public class AESFileEncryptor {
      * encryptedFileName:已加密文件路径("G:/test/middle.txt")
      * decryptedFileName:解密文件路径("G:/test/end.txt")
      */
-
     @SuppressWarnings("static-access")
     public static int decryptedFile(String encryptedFileName,String decryptedFileName){
 
         try {
-            System.out.println("\n\n\n...文件开始 AES 算法解密！");
-            System.out.println("...正在读取待解密文件！");
             //文件输入流
             FileInputStream fileInputStream = new FileInputStream(encryptedFileName);
             // 文件输出流
@@ -102,20 +87,17 @@ public class AESFileEncryptor {
 
             byte[] fileIdentifier = new byte[16];
             byte[] keyValue = new byte[16];
-            System.out.println("...正在取出加密密钥!");
             //读记录的文件加密密码的消息摘要
             fileInputStream.read(keyValue);
             fileInputStream.read(fileIdentifier);
-
             if(new String (fileIdentifier).equals("AESFileEncryptor")){
                 SecretKeySpec key= new SecretKeySpec(keyValue,"AES");
                 byte[] ivValue= new byte[16];
-                //获取IV值
+                // 获取IV值
                 fileInputStream.read(ivValue);
                 IvParameterSpec iv= new IvParameterSpec(ivValue);
                 Cipher cipher = Cipher.getInstance("AES/CFB/PKCS5Padding");
                 cipher.init(cipher.DECRYPT_MODE, key,iv);
-                System.out.println("...正在解密文件!");
                 CipherInputStream cis= new CipherInputStream(fileInputStream, cipher);
                 byte[] buffer=new byte[1024];
                 int n=0;
@@ -124,18 +106,11 @@ public class AESFileEncryptor {
                 }
                 cis.close();
                 fileOutputStream.close();
-                //跳出提示框
-                //JOptionPane.showMessageDialog(null, "解密成功");
-                System.out.println("...文件解密成功!");
                 return 1;
             }else{
-                System.out.println("...文件解密失败！");
                 return 0;
-                //跳出提示框
-                //JOptionPane.showMessageDialog(null, "文件不是我加密的，爱找谁着谁去");
             }
         } catch (Exception e) {
-            System.out.println("...文件解密失败！");
             e.printStackTrace();
             return 0;
         }

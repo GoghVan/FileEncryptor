@@ -29,20 +29,15 @@ public class GenerateKey implements Serializable {
      */
     public static void saveKeyPair() throws NoSuchAlgorithmException {
         try {
-            System.out.println("...密钥对正在产生！");
             KeyPairGenerator keyPairGenerator = KeyPairGenerator.getInstance(ECCEnum.ALGORITHM.value(),
                     ECCEnum.PROVIDER.value());
             keyPairGenerator.initialize(256, new SecureRandom());
             KeyPair keyPair = keyPairGenerator.generateKeyPair();
-            System.out.println("...密钥对已经产生！");
             FileOutputStream fileOutputStream = new FileOutputStream(ECCKeyFile);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
             objectOutputStream.writeObject(keyPair);
             objectOutputStream.close();
-            System.out.println("...密钥对已存入ECCKey.xml文件中！");
-
         } catch (Exception e) {
-            System.out.println("...密钥对未存入ECCKey.xml文件中！");
             e.printStackTrace();
         }
     }
@@ -56,15 +51,12 @@ public class GenerateKey implements Serializable {
         //产生新密钥对
         KeyPair keyPair = null;
         try{
-            System.out.println("...秘钥正在从ECCKey.xml文件中取出！");
             FileInputStream fileInputStream = new FileInputStream(ECCKeyFile);
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             //读出密钥对
             keyPair = (KeyPair)objectInputStream.readObject();
             objectInputStream.close();
-            System.out.println("...秘钥对已从ECCKey.xml文件中取出！");
         }catch (Exception e){
-            System.out.println("...读取密钥对出错！");
             e.printStackTrace();
         }
         return keyPair;

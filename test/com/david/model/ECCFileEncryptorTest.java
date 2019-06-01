@@ -8,9 +8,9 @@ import static org.junit.Assert.*;
  * Created by Gavin on 2019/4/20.
  */
 public class ECCFileEncryptorTest {
-    static String str1 = "G:/TestFile/ECC/start.txt";
-    static String str2 = "G:/TestFile/ECC/middle.txt";
-    static String str3 = "G:/TestFile/ECC/end.txt";
+    static String str1 = "G:/TestFile/AES/start.txt";
+    static String str2 = "G:/TestFile/AES/middle.txt";
+    static String str3 = "G:/TestFile/AES/end.txt";
     @Test
     public void encryptFile() throws Exception {
         System.out.println("encryptFile start:");
