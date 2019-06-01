@@ -58,12 +58,10 @@ public class FileDencryptorAction extends ActionSupport{
         this.fileFileName = fileFileName;
     }
 
-    // 文件暂存位置
-    String filename = "F:\\ShoolData\\大四学习安排\\毕业设计\\文件加密与隐藏工具设计与实现\\代码实现\\secret\\src\\com\\txt" + fileFileName;
-
     @Override
     public String execute() throws Exception{
-        System.out.println("filename:" + filename);
+        // 文件暂存位置
+        String filename = "F:\\ShoolData\\大四学习安排\\毕业设计\\文件加密与隐藏工具设计与实现\\代码实现\\secret\\src\\com\\txt\\" + getFileFileName();
         // 打开文件输入流与输出流
         InputStream inputStream = new FileInputStream(file);
         OutputStream outputStream = new FileOutputStream(filename);
@@ -87,7 +85,7 @@ public class FileDencryptorAction extends ActionSupport{
                 if (file1.exists()) file1.delete();
                 break;
             case "ECC":
-                flag = ECCFileEncryptor.decryptedFile(filename, dencryptedFileAddress);
+                flag = ECCFileEncryptor.decryptedFile("G:/TestFile/AES/middle.txt", "G:/TestFile/AES/end.txt");
                 if (file1.exists()) file1.delete();
                 break;
             case "RSA":

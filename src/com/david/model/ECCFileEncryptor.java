@@ -38,8 +38,8 @@ public class ECCFileEncryptor{
             }
             String data = new String(stringBuffer);
             // 将源文件加密并存入文件
-            // 编码问题注意！！！
-            byte [] encryptFile = ECCUtil.encrypt(data.getBytes("UTF-8"), publicKey);
+            // 编码问题注意！！！网页版GBK，本地测试UTF-8
+            byte [] encryptFile = ECCUtil.encrypt(data.getBytes("GBK"), publicKey);
             // 将byte[]类型转换成StringBuffer类型，方便后续操作
             stringBuffer1 = new StringBuffer();
             for (byte i : encryptFile) {
@@ -66,7 +66,6 @@ public class ECCFileEncryptor{
      * @throws Exception 抛出异常
      */
     public static int decryptedFile(String encryptedFileName,String decryptedFileName)throws Exception{
-
         // 加密文件解密
         File file1 = new File(encryptedFileName);
         File file2 = new File(decryptedFileName);
